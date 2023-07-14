@@ -1,0 +1,91 @@
+body {
+    background: #f9f9f9
+}
+
+a {
+    color: #222
+}
+a:hover {
+    color: #666
+}
+.texto {
+    font-weight: 400;
+    font-size: 14pt;
+    color: #555;
+    line-height: 30px;
+}
+.capaGrande {
+    max-width: 540px
+}
+.capaMedia {
+    max-width: 270px
+}
+.capaPequena {
+    max-width: 135px
+}
+.tempoCarregamento {
+    font-size: .7em;
+    float: right
+}
+
+.overflow {
+    position: relative;
+    overflow: hidden;
+}
+
+.zoom img {
+    transition: all 0.2s linear;
+}
+
+.zoom:hover img {
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+}
+
+.pagination>li>a,
+.pagination>li>span {
+    color: #333
+}
+.pagination span.active {
+    background: #555;
+    color: #fff;
+    border: none
+}
+
+blockquote {
+    background: #f9f9f9;
+    border-left: 10px solid #ccc;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    quotes: "\201C""\201D""\2018""\2019";
+}
+blockquote:before {
+    color: #ccc;
+    content: open-quote;
+    font-size: 4em;
+    line-height: 0.1em;
+    margin-right: 0.25em;
+    vertical-align: -0.4em;
+}
+blockquote p {
+    display: inline;
+}
+.hljs {
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+}
+.slide img {
+    aspect-ratio: 16 / 9;
+    height: 100%;
+    width: 100%;
+}
+iframe {
+    aspect-ratio: 16 / 9;
+    height: 100%;
+    width: 100%;
+}
+.iconeEmail {
+    font-size: 10em;
+    color: #999
+}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<div class="container my-5">
+
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            {% if posts %}
+
+            <div class="row">
+                {% for post in posts %}
+                <div class="col-md-6 mb-4">
+                    <div class="card border-0 h-100">
+                        {% if post.capa %}
+                        <a class="overflow zoom" href="{{url('post/'~post.categoria.slug~'/'~post.slug)}}" tooltip="tooltip" title="{{post.titulo}}">
+                            <img src="{{url('uploads/imagens/thumbs/'~post.capa)}}" alt="{{post.titulo}}" title="{{post.titulo}}" class="capaGrande"/>           
+                        </a>
+                        {% endif %}
+                        <div class="card-body">
+                            <a href="{{url('post/'~post.categoria.slug~'/'~post.slug)}}" tooltip="tooltip" title="{{post.titulo}}">
+
+                                <h4 class="card-title">{{post.titulo}}</h4>
+
+                                <div class="d-flex justify-content-between my-3 text-muted">
+                                    <small>{{post.categoria.titulo |upper}}</small>
+                                    <small>{{ contarTempo(post.cadastrado_em) }}</small>
+                                </div>
+
+                                <p class="card-text">{{resumirTexto(post.texto, 150)}}</p>
+                            </a>
+                            {% if usuario().level == 3 %}
+                                <div class="card-footer border-0 bg-transparent text-secondary text-end">
+                                    <a href="{{ url('admin/posts/editar/'~post.id) }}" tooltip="tooltip" title="Editar">
+                                        <i class="fa-solid fa-pen m-1"></i>
+                                    </a>
+                                    <a href="{{ url('admin/posts/deletar/'~post.id) }}" tooltip="tooltip" title="Deletar">
+                                        <i class="fa-solid fa-trash m-1"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                        </div>
+                    </div>
+                </div>    
+                {%endfor %}
+            </div>
+
+            {{paginacao|raw}}
+
+            <div class="text-center">
+                <small class="text-muted">{{paginacaoInfo}}</small>
+            </div>
+            {% else %}
+            <div class="alert alert-warning" role="alert">
+                Nenhum post cadastrado para exibir!
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="col-lg-3 mt-4">
+            {% include 'sidebar.html' %}
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

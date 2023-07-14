@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<div class="container my-5">
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+            <div class="card mb-4 border-0">
+                <div class="card-header bg-transparent d-flex justify-content-between">
+                    <h1>{{post.titulo}}</h1>
+                    <div>
+                        {% if usuario().level == 3 %}
+                        <div class="card-footer border-0 bg-transparent text-secondary text-end">
+                            <a href="{{ url('admin/posts/editar/'~post.id) }}" tooltip="tooltip" title="Editar">
+                                <i class="fa-solid fa-pen m-1"></i>
+                            </a>
+                            <a href="{{ url('admin/posts/deletar/'~post.id) }}" tooltip="tooltip" title="Deletar">
+                                <i class="fa-solid fa-trash m-1"></i>
+                            </a>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="card-body">                  
+
+                    <div class="mb-3">
+                        <small class="text-muted">Por {{post.usuario.nome}}, {{ post.cadastrado_em|date("d/m/Y") }} às {{ post.cadastrado_em|date("H:i") }} em {{post.categoria.titulo}}</small>
+                    </div>
+
+                    {% if post.capa and post.capa_ativa == 1 %}
+                    <div class="float-xl-start float-lg-none capaGrande mx-auto">
+                        <div class="card border-0 me-4">
+                            <a data-fancybox data-caption="{{post.titulo}}" class="overflow zoom " href="{{url('uploads/imagens/'~post.capa)}}">
+                                <img src="{{url('uploads/imagens/'~post.capa)}}" alt="{{post.titulo}}" title="{{post.titulo}}"/>
+                            </a>
+                        </div>
+                    </div>
+                    {% endif %}            
+
+                    <div class="texto">
+                        <p>{{post.texto | raw}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3">
+            {% include 'sidebar.html' %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

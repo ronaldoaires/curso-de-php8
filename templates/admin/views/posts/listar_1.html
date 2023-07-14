@@ -1,0 +1,127 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}  
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Posts
+        </li>
+    </ol>
+</nav>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-0 d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge rounded text-bg-secondary">{{total.posts}} posts</span> 
+            <span class="badge rounded text-bg-success">{{total.postsAtivo}} ativo</span> 
+            <span class="badge rounded text-bg-danger">{{total.postsInativo}} inativo</span> 
+        </div>
+        <a href="{{url('admin/posts/cadastrar')}}" class="btn btn-dark" tooltip="tooltip" title="Cadastrar Post">
+            Cadastrar
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover" id="tabela">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Capa</th>
+                        <th>Título</th>
+                        <th class="text-center">Categoria</th>
+                        <th class="text-center">Visitas</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Ação</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+                    {% for post in posts %}
+                    <tr>
+                        <th>{{post.id}}</th>
+                        <th>
+                            {% if post.capa %}
+                            <div class="float-xl-start float-lg-none capa mx-auto">
+                                <div class="card border-0">
+                                    <a data-fancybox data-caption="{{post.titulo}}" class="overflow zoom " href="{{url('uploads/imagens/'~post.capa)}}">
+                                        <img src="{{url('uploads/imagens/'~post.capa)}}" />
+                                    </a>
+                                </div>
+                            </div>
+                            {% else %}
+                            <img src="{{url('templates/admin/assets/img/semcapa.png')}}" class="capa" />
+                            {% endif %} 
+                        </th>
+                        <td class="fw-bold">
+                            {{post.titulo}}
+                        </td>
+                        <td class="text-center"> {{post.categoria.titulo}}</td>
+                        <td class="text-center">
+                            {{formatarNumero(post.visitas)}}
+                        </td>
+                        <td class="text-center">
+                            {% if post.status == 1 %}
+                            <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                            {% else %}
+                            <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="#info{{post.id}}" data-bs-toggle="offcanvas" tooltip="tooltip" title="Status">
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </a>
+
+                            <a href="{{ url('admin/posts/editar/'~post.id) }}" tooltip="tooltip" title="Editar">
+                                <i class="fa-solid fa-pen m-1"></i>
+                            </a>
+                            <a href="{{ url('admin/posts/deletar/'~post.id) }}" tooltip="tooltip" title="Deletar">
+                                <i class="fa-solid fa-trash m-1"></i>
+                            </a>
+
+                        </td>
+                    </tr>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="info{{post.id}}">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasExampleLabel">{{post.titulo}}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        {% if post.capa %}
+                        <a data-fancybox data-caption="{{post.titulo}}" class="overflow zoom " href="{{url('uploads/imagens/'~post.capa)}}">
+                            <img src="{{url('uploads/imagens/'~post.capa)}}" />
+                        </a>
+                        {% endif %}
+
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">
+                                Cadastrado em: {{ post.cadastrado_em|date("d/m/Y H:i:s") }}
+                            </li>
+                            <li class="list-group-item">
+                                Atualizado em: {%if post.atualizado_em %}{{post.atualizado_em|date("d/m/Y H:i:s")}}{%else%}Nunca{%endif%}
+                            </li>
+                            <li class="list-group-item">
+                                Última visita em: {%if post.ultima_visita_em %}{{post.ultima_visita_em|date("d/m/Y H:i:s")}}{%else%}Nunca{%endif%}
+                            </li>
+                            <li class="list-group-item">
+                                Cadastrado por: <b>{{post.usuario.nome}}</b>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                {%endfor%}
+                </tbody>
+            </table>
+        </div>     
+
+
+    </div>
+</div>
+{% endblock %}

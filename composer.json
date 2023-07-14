@@ -1,0 +1,32 @@
+{
+    "name": "ceounset/cursophp8",
+    "description": "Curso de PHP 8",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "sistema\\": "sistema/"
+        },
+        "files": [
+            "sistema/configuracao.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Ronaldo Aires",
+            "homepage": "https://www.unset.com.br",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+        "email": "ceo@unset.com.br"
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=8.0",
+        "pecee/simple-router": "dev-master",
+        "twig/twig": "^3.0",
+        "digitalnature/php-ref": "dev-master",
+        "verot/class.upload.php": "dev-master",
+        "phpmailer/phpmailer": "dev-master"
+    }
+}

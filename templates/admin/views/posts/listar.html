@@ -1,0 +1,68 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}  
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Posts
+        </li>
+    </ol>
+</nav>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-bottom d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge">
+                <span class="text-secondary">
+                    {{formatarNumero(total.posts)}} posts
+                </span>                
+            </span>
+            <span class="text-secondary">|</span>
+            <span class="badge text-secondary">
+                <span class="text-success">
+                    {{formatarNumero(total.postsAtivo)}} 
+                </span>ativo
+            </span>
+            <span class="text-secondary">|</span>
+            <span class="badge text-secondary">
+                <span class="text-danger">
+                    {{formatarNumero(total.postsInativo)}} 
+                </span>       inativo         
+            </span> 
+        </div>
+        <a href="{{url('admin/posts/cadastrar')}}" class="btn btn-dark" tooltip="tooltip" title="Cadastrar Post">
+            Cadastrar
+        </a>
+    </div>
+    <div class="card-body">
+
+        <div class="table-responsive">
+
+            <table id="tabelaPosts" url="{{url()}}" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Capa</th>
+                        <th class="text-center">Título</th>
+                        <th>Categoria</th>
+                        <th>Visitas</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+
+            </table>
+
+        </div>     
+
+
+    </div>
+</div>
+{% endblock %}

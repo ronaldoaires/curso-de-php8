@@ -1,0 +1,294 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
+
+body {
+    font-family: "Inter", "Helvetica Neue", Arial;
+}
+.saudacao {
+    font-size: .7em
+}
+.sidebar {
+    width: 300px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    z-index: 100;
+    transition: left 300ms;
+    background: var(--cor3);
+    overflow-y: auto;
+}
+
+.sidebar::-webkit-scrollbar {
+    width: 15px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px var(--cor2);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background: var(--cor2);
+    border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--cor1);
+}
+
+.sidebarLogo {
+    padding: 1rem;
+    margin-bottom: 5px;
+}
+.sidebarLogo a {
+    color: #fff !important;
+}
+.logo {
+    max-width: 100px;
+    margin: auto !important
+}
+.sidebarTitulo {
+    color: var(--cor12);
+    font-size: .75rem;
+}
+
+.sidebarMenu ul {
+    padding-left: .5rem;
+}
+
+.sidebarMenu li {
+    line-height: 40px;
+    margin-right: 10px;
+    list-style: none
+}
+
+.sidebarMenu li:hover {
+    background: var(--cor4);
+}
+
+.sidebarMenu a {
+    padding: .2rem;
+    display: block;
+    color: var(--cor14);
+    border-bottom: 1px solid var(--cor2);
+}
+
+.sidebarMenu a:hover {
+    border-bottom: 1px solid var(--cor2);
+    color: var(--cor8) !important;
+}
+
+.sidebarMenu i {
+    padding-right: .5rem;
+}
+
+
+header h2 {
+    display: flex;
+    align-items: center;
+}
+
+header h2 label {
+    display: inline-block;
+    background: transparent;
+    padding-right: 0;
+    margin-right: 1rem;
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    color: var(--cor2);
+    display: flex;
+    align-items: center;
+    justify-content: center !important;
+    cursor: pointer
+}
+
+header h2 i {
+    font-size: .8em;
+}
+
+#menu {
+    display: none;
+}
+
+#menu:checked+.sidebar {
+    width: 70px;
+}
+
+#menu:checked+.sidebar .sidebarLogo a span:last-child,
+#menu:checked+.sidebar li a span:last-child {
+    display: none;
+}
+
+#menu:checked~.conteudo {
+    margin-left: 70px;
+}
+
+#menu:checked+.sidebar .copyright {
+    display: none
+}
+
+#menu:checked+.sidebar .sidebarLogo{
+    display: none
+}
+#menu:checked+.sidebar .sidebarTitulo{
+    display: none
+}
+
+#menu:checked~.conteudo header {
+    width: calc(100% - 70px);
+    left: 70px;
+}
+
+#menu:checked+.sidebar .sidebarMenu i {
+    font-size: 1.3em;
+    padding-left: .8rem;
+}
+
+.conteudo {
+    margin-left: 300px;
+    transition: margin-left 300ms;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 10px 0px 10px;
+    box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+    position: fixed;
+    left: 300px;
+    top: 0;
+    width: calc(100% - 300px);
+    z-index: 100;
+    transition: left 300ms;
+}
+
+header label span {
+    font-size: 1.7rem;
+}
+
+header h2 {
+    color: #666;
+}
+
+main {
+    margin-top: 49px;
+    padding: 2rem 1.5rem;
+    background: #f5f7fb;
+    min-height: calc(100vh - 100px);
+}
+
+.copyright {
+    font-size: .8em;
+}
+
+.capa {
+    max-width: 80px
+}
+
+.pagination a{
+    color: black;
+    background: #eee
+}
+.active>.page-link {
+    background: black;
+    border-color: black
+}
+
+table.dataTable tbody th,
+table.dataTable tbody td {
+  vertical-align: middle;
+}
+table.dataTable tbody td img {
+  display: block;
+}
+
+.thumb {
+    max-width: 80px !important;
+    border: 1px solid #999
+}
+
+@media screen and (max-width: 1200px) {
+    .sidebar {
+        width: 70px;
+    }
+    .sidebar .sidebarLogo span:last-child,
+    .sidebar li a span:last-child {
+        display: none;
+    }
+    .sidebarMenu i {
+        font-size: 1.3em;
+        padding-left: .8rem;
+    }
+    .conteudo {
+        margin-left: 70px;
+    }
+    .conteudo header {
+        width: calc(100% - 70px);
+        left: 70px;
+    }
+    .sidebar:hover {
+        width: 300px;
+        z-index: 200;
+    }
+
+    .sidebar:hover .sidebarLogo span:last-child,
+    .sidebar:hover li a span:last-child {
+        display: inline;
+    }
+
+    .sidebar:hover li i {
+        font-size: 1em;
+    }
+
+    .sidebarLogo,.sidebarTitulo {
+        display: none
+    }
+
+
+}
+
+@media screen and (max-width: 992px) {
+}
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        left: -100% !important;
+    }
+
+    .conteudo {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    header {
+        width: 100% !important;
+        left: 0 !important;
+    }
+
+    #menu:checked+.sidebar {
+        left: 0 !important;
+        z-index: 100;
+        width: 300px;
+    }
+
+    #menu:checked~.conteudo {
+        margin-left: 0 !important;
+    }
+
+    #menu:checked+.sidebar .sidebarLogo h2 span:last-child,
+    #menu:checked+.sidebar li a span:last-child {
+        display: inline;
+    }
+    #menu:checked+.sidebar .sidebarLogo{
+        display: block
+    }
+    #menu:checked+.sidebar .sidebarTitulo{
+        display: block
+    }
+
+}
+
+@media screen and (max-width: 576px) {
+
+}

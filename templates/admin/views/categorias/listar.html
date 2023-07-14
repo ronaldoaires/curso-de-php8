@@ -1,0 +1,89 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Categorias
+        </li>
+    </ol>
+</nav>
+{{flash()}}
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-white border-buttom d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge">
+                <span class="text-secondary">
+                    {{formatarNumero(total.categorias)}} categorias
+                </span>                
+            </span>
+            <span class="text-secondary">|</span>
+            <span class="badge text-secondary">
+                <span class="text-success">
+                    {{formatarNumero(total.categoriasAtiva)}} 
+                </span>ativa
+            </span>
+            <span class="text-secondary">|</span>
+            <span class="badge text-secondary">
+                <span class="text-danger">
+                    {{formatarNumero(total.categoriasInativa)}}
+                </span>inativa                
+            </span> 
+        </div>
+
+        <a href="{{url('admin/categorias/cadastrar')}}" class="btn btn-dark" tooltip="tooltip" title="Cadastrar Categoria">
+            Cadastrar
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover table-striped" id="tabelaCategorias">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Título</th>
+                        <th class="text-center">Posts</th>
+                        <th class="text-center">Visitas</th>
+                        <th class="text-center">Status</th>
+                        <th class="text-center">Ação</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for categoria in categorias %}
+                    <tr>
+                        <th>{{categoria.id}}</th>
+                        <td class="fw-bold">{{categoria.titulo}}</td>
+                        <td class="text-center">
+                            {{formatarNumero(categoria.totalPosts(categoria.id))}}
+                        </td>
+                        <td class="text-center">{{categoria.visitas}}</td>
+                        <td class="text-center">
+                            {% if categoria.status == 1 %}
+                            <i class="fa-solid fa-circle text-success" tooltip="tooltip" title="Ativo"></i>
+                            {% else %}
+                            <i class="fa-solid fa-circle text-danger" tooltip="tooltip" title="Inativo"></i>
+                            {% endif %}
+                        </td>
+                        <td class="text-center">
+                            <a href="{{ url('admin/categorias/editar/'~categoria.id) }}" tooltip="tooltip" title="Editar">
+                                <i class="fa-solid fa-pen m-1"></i>
+                            </a>
+                            <a href="{{ url('admin/categorias/deletar/'~categoria.id) }}" tooltip="tooltip" title="Deletar">
+                                <i class="fa-solid fa-trash m-1"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>     
+
+
+    </div>
+</div>
+{% endblock %}

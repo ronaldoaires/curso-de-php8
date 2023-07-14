@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<div class="container my-5">
+    
+    <div class="my-3">
+        {{flash()}}
+    </div>
+
+    <div class="row">
+        <div class="col-lg-9 col-md-12">
+
+            {% if posts.slides %}
+            <div id="slide" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    {% for slide in posts.slides %}
+                    <button type="button" data-bs-target="#slide" data-bs-slide-to="{{loop.index0}}" {% if loop.index0 == 0 %}class="active" {%endif%} aria-current="true" aria-label="{{slide.titulo}}"></button>
+                    {% endfor %}
+                </div>
+                <div class="carousel-inner">
+                    {% for slide in posts.slides %}
+                    {% if loop.index0==0%}
+                    <div class='carousel-item active'> 
+                        {%else%}
+                        <div class='carousel-item'>
+                            {%endif%}
+                            <a href="{{url('post/'~slide.categoria.slug~'/'~slide.slug)}}" tooltip="tooltip" title="{{slide.titulo}}">
+                                {% if slide.capa %}
+                                <img src="{{url('uploads/imagens/'~slide.capa)}}" class="slide" alt="{{slide.titulo}}">
+                                {% endif %}
+                                <div class="carousel-caption d-none d-md-block">
+                                </div>
+                            </a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#slide" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#slide" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Nenhum slide cadastrado para exibir!
+                </div>
+                {% endif %}
+
+                {% if posts %}
+                <div class="row mt-5">
+                    {% for post in posts.posts %}
+                    <div class="col-md-6 mb-4">
+                        <div class="card border-0 h-100">
+                            {% if post.capa %}
+                            <a href="{{url('post/'~post.categoria.slug~'/'~post.slug)}}" tooltip="tooltip" title="{{post.titulo}}">
+                                <img src="{{url('uploads/imagens/thumbs/'~post.capa)}}" alt="{{post.titulo}}" title="{{post.titulo}}" class="capaGrande card-img-top p-3"/>           
+                            </a>
+                            {% endif %}
+                            <div class="card-body">
+                                <a href="{{url('post/'~post.categoria.slug~'/'~post.slug)}}" tooltip="tooltip" title="{{post.titulo}}">
+
+                                    <h4 class="card-title">{{post.titulo}}</h4>
+
+                                    <div class="d-flex justify-content-between my-3 text-muted">
+                                        <small>{{post.categoria.titulo |upper}}</small>
+                                        <small>{{ contarTempo(post.cadastrado_em) }}</small>
+                                    </div>
+
+                                    <p class="card-text">{{resumirTexto(post.texto, 150)}}</p>
+                                </a>
+                                {% if usuario().level == 3 %}
+                                <div class="card-footer border-0 bg-transparent text-secondary text-end">
+                                    <a href="{{ url('admin/posts/editar/'~post.id) }}" tooltip="tooltip" title="Editar">
+                                        <i class="fa-solid fa-pen m-1"></i>
+                                    </a>
+                                    <a href="{{ url('admin/posts/deletar/'~post.id) }}" tooltip="tooltip" title="Deletar">
+                                        <i class="fa-solid fa-trash m-1"></i>
+                                    </a>
+                                </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>    
+                    {% endfor %}
+                </div>
+                {% else %}
+                <div class="alert alert-warning" role="alert">
+                    Nenhum post cadastrado para exibir!
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="col-lg-3">
+                {% include 'sidebar.html' %}
+
+                <div class="card border-0 mb-4">
+                    <div class="card-header fw-bold bg-white text-secondary">
+                        Mais Lidos
+                    </div>
+                    <div class="card-body">
+                        {% if posts.maisLidos %}
+                        <ul class="list-group list-group-flush">
+                            {% for post in posts.maisLidos %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <a href="{{url('post/'~post.categoria.slug~'/'~post.slug)}}" class="fw-bold" tooltip="tooltip" title="{{post.titulo}}">
+                                    <div class="d-flex align-items-center">
+                                        <div class="fw-bold fs-1 text-secondary">
+                                            {{loop.index}}
+                                        </div>
+
+                                        <div class="ms-3">
+                                            <p class="fw-bold mb-1">{{post.titulo}}</p>
+                                        </div>
+                                    </div>
+
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                        <div class="alert alert-warning">
+                            Nenhum post cadastrado!
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    </div>
+
+    {% endblock %}

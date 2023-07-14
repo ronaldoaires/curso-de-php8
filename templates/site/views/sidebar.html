@@ -1,0 +1,34 @@
+<div class="card border-0 mb-4">
+    <div class="card-header fw-bold bg-white text-secondary">
+        Categorias
+    </div>
+    <div class="card-body">
+        {% if categorias %}
+        <ul class="list-group list-group-flush">
+            {% for categoria in categorias %}
+            <li class="list-group-item d-flex justify-content-between">
+                <a href="{{url('categoria/'~categoria.slug)}}" class="fw-bold" tooltip="tooltip" title="{{categoria.titulo}}">
+                    {{categoria.titulo}}
+                </a>
+                {% if usuario().level == 3 %}
+                <div class="fw-normal">
+                    <a href="{{ url('admin/categorias/editar/'~categoria.id) }}" tooltip="tooltip" title="Editar">
+                        <i class="fa-solid fa-pen m-1"></i>
+                    </a>
+                    <a href="{{ url('admin/categorias/deletar/'~categoria.id) }}" tooltip="tooltip" title="Deletar">
+                        <i class="fa-solid fa-trash m-1"></i>
+                    </a>
+                </div>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+        {% else %}
+        <div class="alert alert-warning">
+            Nenhuma categoria cadastrada!
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+

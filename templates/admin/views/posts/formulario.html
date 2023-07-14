@@ -1,0 +1,84 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/posts/listar')}}">
+                Posts
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            {% if post.id %}Atualizar{%else%}Cadastrar{%endif%}
+        </li>
+    </ol>
+</nav>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-body">
+        <form action="{% if post.id %}{{url('admin/posts/editar/'~post.id)}}{%else%}{{url('admin/posts/cadastrar')}}{%endif%}" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="mb-3">
+                        <label for="capa" class="form-label">Capa</label>
+                        <input class="form-control" type="file" id="capa" name="capa" accept=".png, .jpg, .jpeg">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="capa_ativa" class="form-label">Capa Ativa no Post</label>
+                        <select class="form-select" name="capa_ativa">
+                            <option value="1" {% if post.capa_ativa == '1' %}selected{%endif%}>Sim</option>
+                            <option value="0" {% if post.capa_ativa == '0' %}selected{%endif%}>Não</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="titulo" class="form-label">Título</label>
+                <input type="text" name="titulo" id="titulo" value="{{post.titulo}}" class="form-control">
+            </div>
+            <div class="mb-3">
+                <label for="texto" class="form-label">Texto</label>
+                <textarea name="texto" class="form-control ckeditor" rows="3">{{post.texto}}</textarea>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="categoria_id" class="form-label">Categoria</label>
+                        <select class="form-select" name="categoria_id" id="categoria_id">
+                            {% for categoria in categorias %}
+                            <option value="{{categoria.id}}" {% if post.categoria_id == categoria.id %}selected{%endif%}>{{categoria.titulo}}</option>
+                            {%endfor%}
+                        </select>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-select" name="status">
+                            <option value="1" {% if post.status == '1' %}selected{%endif%}>Ativo</option>
+                            <option value="0" {% if post.status == '0' %}selected{%endif%}>Inativo</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-grid">
+                <input type="submit" class="btn btn-dark" value="{% if post.id %}Atualizar{%else%}Cadastrar{%endif%}">
+            </div>
+
+        </form>
+    </div>    
+</div>
+</div>
+{% endblock %}

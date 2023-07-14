@@ -1,0 +1,59 @@
+<footer class="bg-dark">
+    <div class="container d-flex flex-wrap justify-content-between align-items-center py-3">
+
+        <p class="col-md-4 mb-0 text-muted">&copy; 2022-{{ "now"|date("Y") }} {{constant('SITE_NOME')}}</p>
+
+        <ul class="nav col-md-4 justify-content-end">
+            <li class="nav-item">
+                <a href="{{ url() }}" class="nav-link px-2 text-light" tooltip="tooltip" title="Página Inicial">Home</a>
+            </li>
+            <li class="nav-item">
+                <a href="#" data-bs-toggle="modal" data-bs-target="#contatoModal" class="nav-link px-2 text-light" tooltip="tooltip" title="Fale Conosco">Fale Conosco</a>
+            </li>
+        </ul>
+    </div>
+</footer>
+<small class="tempoCarregamento">Executado em  <b>{{tempoCarregamento()}}</b> segundos</small>
+
+<!-- Contato Modal -->
+<div class="modal fade" id="contatoModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5">Fale Conosco</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {{flash()}}
+
+                <form class="formulario" method="post" action="{{url('contato')}}" enctype="multipart/form-data">
+                    <div class="form-floating  mb-3">
+                        <input type="text" name="nome" id="nome" class="form-control" placeholder="Nome">
+                        <label for="nome">Nome</label>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" name="email" id="email" class="form-control" placeholder="E-mail">
+                        <label for="email">E-mail</label>
+                        <div class="invalid-feedback"></div>
+                    </div>
+                    <div class="form-floating  mb-3">
+                        <input type="text" name="assunto" id="assunto" class="form-control" placeholder="Assunto">
+                        <label for="nome">Assunto</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <textarea name="mensagem" id="mensagem" style="height: 120px" class="form-control" placeholder="Mensagem"></textarea>
+                        <label for="mensagem">Mensagem</label>
+                    </div>
+                    <div class="input-group mb-3">
+                        <label class="input-group-text" for="anexos">Anexos</label>
+                        <input type="file" name="anexos[]" multiple id="anexos" accept="" class="form-control" >
+                    </div>
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-secondary">Enviar Mensagem</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

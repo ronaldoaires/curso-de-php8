@@ -1,0 +1,81 @@
+<header class="p-3 text-bg-dark">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <a href="{{ url() }}" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                <img src="{{ url('templates/site/assets/img/php-logo.svg') }}" alt="php8.1" height="22" width="60">
+            </a>
+
+            <ul class="navbar navbar-dark bg-dark col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 list-unstyled">
+                <li>
+                    <a href="{{ url() }}" class="nav-link px-2" tooltip="tooltip" title="Página Inicial">Home</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Categorias
+                    </a>
+                    {% if categorias %}
+                    <ul class="dropdown-menu">
+                        {% for categoria in categorias %}
+                        <li>
+                            <a class="dropdown-item" href="{{url('categoria/'~categoria.slug)}}" tooltip="tooltip" title="{{categoria.titulo}}">
+                                {{categoria.titulo}}
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    {% else %}
+                    <div class="alert alert-warning">
+                        Nenhuma categoria cadastrada!
+                    </div>
+                    {% endif %}
+                </li>
+                 
+            </ul>
+
+            <form data-url-busca="{{ url('buscar') }}" class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                <input type="search" name="busca" id="busca" class="form-control form-control-dark text-bg-dark" placeholder="Buscar..." aria-label="Search">
+            </form>            
+
+            <div class="text-end">
+                {% if usuario().level == 3 %}
+                <div class="btn-group">
+
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false">
+                        <i class="fa-solid fa-user me-2"></i> {{usuario().nome}}
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-lg-end">
+                        <li>
+                            <a class="dropdown-item" href="{{url('admin/dashboard/')}}" tooltip="tooltip" title="Dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{url('admin/usuarios/editar/'~usuario().id)}}" tooltip="tooltip" title="Perfil">
+                                Perfil
+                            </a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item text-danger" href="{{url('admin/sair')}}" tooltip="tooltip" title="Sair do Sistema">
+                                Sair
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                {% elseif usuario().level == 1 %}
+<!--                Usuário Logado-->
+                {% else %}
+<!--                <a href="" class="btn btn-outline-light me-2" tooltip="tooltip" title="Faça login">
+                    Entrar
+                </a>
+                <a href="" class="btn btn-warning" tooltip="tooltip" title="Junte-se a nós">
+                    Cadastre-se
+                </a>-->
+                {% endif %}
+
+            </div>
+        </div>
+
+        <div class="my-3" id="buscaResultado"></div>
+
+    </div>
+</header>

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block conteudo %}
+
+<div class="d-flex align-items-center justify-content-center vh-100 bg-danger">
+            <div class="text-center">
+                <h1 class="display-1 fw-bold">404</h1>
+                <p class="fs-3 text-white"> Opps! há, não.</p>
+                <p class="text-light">
+                    Não encontramos a página que você tentou acessar!
+                  </p>
+                <a href="{{url()}}" class="btn btn-light">Voltar para Home</a>
+            </div>
+        </div>
+
+
+{% endblock %}

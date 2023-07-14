@@ -1,0 +1,200 @@
+:root {
+    --cor1: #0a0d12;
+    --cor2: #202736;
+    --cor3: #2b3448;
+    --cor4: #36415a;
+    --cor5: #4c5b7e;
+    --cor6: #6275a2;
+    --cor7: #6d82b5;
+    --cor8: #7b8ebc;
+    --cor9: #8a9bc3;
+    --cor10: #98a7cb;
+    --cor11: #a7b4d2;
+    --cor12: #b6c0da;
+    --cor13: #c4cde1;
+    --cor14: #d3d9e8;
+    --cor15: #f0f2f7;
+    --corTexto: #2b3448;
+    --corLink: #414e6c;
+}
+
+* {
+
+}
+
+body {
+    color: var(--corTexto)
+}
+
+a {
+    color: var(--corLink);
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--cor5);
+}
+
+
+img {
+    width: 100%;
+}
+
+.corTexto {
+    color: var(--corTexto)
+}
+
+.fundo1 {
+    background: var(--cor1)
+}
+
+.fundo2 {
+    background: var(--cor2)
+}
+
+.fundo3 {
+    background: var(--cor3)
+}
+
+.fundo4 {
+    background: var(--cor4)
+}
+
+.fundo5 {
+    background: var(--cor5)
+}
+
+.fundo6 {
+    background: var(--cor6)
+}
+
+.fundo7 {
+    background: var(--cor7)
+}
+
+.fundo8 {
+    background: var(--cor8)
+}
+
+.fundo9 {
+    background: var(--cor9)
+}
+
+.fundo10 {
+    background: var(--cor10)
+}
+
+.fundo11 {
+    background: var(--cor11)
+}
+
+.fundo12 {
+    background: var(--cor12)
+}
+
+.fundo13 {
+    background: var(--cor13)
+}
+
+.fundo14 {
+    background: var(--cor14)
+}
+
+.fundo15 {
+    background: var(--cor15)
+}
+
+.cor1 {
+    color: var(--cor1)
+}
+
+.cor2 {
+    color: var(--cor2)
+}
+
+.cor3 {
+    color: var(--cor3)
+}
+
+.cor4 {
+    color: var(--cor4)
+}
+
+.cor5 {
+    color: var(--cor5)
+}
+
+.cor6 {
+    color: var(--cor6)
+}
+
+.cor7 {
+    color: var(--cor7)
+}
+
+.cor8 {
+    color: var(--cor8)
+}
+
+.cor9 {
+    color: var(--cor9)
+}
+
+.cor10 {
+    color: var(--cor10)
+}
+
+.cor11 {
+    color: var(--cor11)
+}
+
+.cor12 {
+    color: var(--cor12)
+}
+
+.cor13 {
+    color: var(--cor13)
+}
+
+.cor14 {
+    color: var(--cor14)
+}
+
+.cor15 {
+    color: var(--cor15)
+}
+
+.ajaxLoading{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: #000;
+    opacity: 0.8;
+    z-index: 1099;
+    display: none
+}
+.spinner {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    text-align: center
+}
+.spinner i {
+    font-size: 3.5em;
+    color: lime;
+}
+.spinner p {
+    color: #fff;
+    animation: rotacionar 2s infinite;
+}
+@keyframes rotacionar {
+    0%,80% {
+        transform: rotateY(360deg)
+    }
+}
+
+

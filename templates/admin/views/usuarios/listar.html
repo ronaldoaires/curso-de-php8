@@ -1,0 +1,67 @@
+{% extends "dashboard.html" %}
+
+{% block conteudo %}  
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{{url('admin/dashboard')}}">
+                Dashboard
+            </a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+            Usuários
+        </li>
+    </ol>
+</nav>
+
+{{ flash() }}
+
+<div class="card border-0 shadow-sm">
+    <div class="card-header bg-light border d-flex justify-content-between align-items-center">
+        <div>
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.usuarios}} usuário</span><br><br>
+                Ativo: <span class="text-success">{{total.usuariosAtivo}}</span> |
+                Inativo: <span class="text-danger">{{total.usuariosInativo}}</span>
+            </span> 
+
+            <span class="badge bg-white text-secondary border">
+                <span class="text-dark">{{total.admin}} admin:</span><br><br>
+                Ativo: <span class="text-success">{{total.adminAtivo}}</span> |
+                Inativo: <span class="text-danger">{{total.adminInativo}}</span>
+            </span>
+        </div>
+        <a href="{{url('admin/usuarios/cadastrar')}}" class="btn btn-dark" tooltip="tooltip" title="Cadastrar Post">
+            Cadastrar
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table id="tabelaUsuarios" url="{{url()}}" class="table table-hover table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>id</th>
+                        <th>Nome</th>
+                        <th>E-mail</th>
+                        <th>Level</th>
+                        <th>Status</th>
+                        <th>Ação</th>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>     
+
+
+    </div>
+</div>
+{% endblock %}
